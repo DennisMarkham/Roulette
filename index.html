@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<style>
+#ball {
+    position: absolute;
+    left: 200px;
+    top: 50px;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+}
+
+#wheel {
+	transition: transform 1s;
+}
+</style>
+
+</head>
+<body>
+
+<img id = "ball" src = "ball.png" onclick="spin()"></img>
+
+<img id = "wheel" src = "Rwheelbg.png" onclick="spin()"></img>
+
+<script>
+
+var randomNum = Math.floor(Math.random() * 355) + 1; 
+
+function rotate(degrees){
+	var rw=document.getElementById('wheel');
+	rw.setAttribute('style','transform:rotate(' + 360 + degrees + 'deg)');
+	console.log(degrees);
+	
+}
+
+function spin(){
+	console.log("1");
+	for (i = 0; i < randomNum; i = i + 10) {
+		console.log("2");
+    rotate(i);
+    
+}
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
