@@ -13,7 +13,7 @@
 }
 
 #wheel {
-	transition: transform 1s;
+	
 }
 </style>
 
@@ -24,13 +24,17 @@
 
 <img id = "wheel" src = "Rwheelbg.png" onclick="spin()"></img>
 
+<button id = "reset" onclick="reset()">Reset</button>
+
 <script>
 
 var randomNum = Math.floor(Math.random() * 355) + 1; 
 
+var rw=document.getElementById('wheel');
+
 function rotate(degrees){
-	var rw=document.getElementById('wheel');
-	rw.setAttribute('style','transform:rotate(' + 360 + degrees + 'deg)');
+	
+	rw.setAttribute('style', 'transition: transform 1s; transform:rotate(' + 360 + degrees + 'deg)');
 	console.log(degrees);
 	
 }
@@ -44,7 +48,10 @@ function spin(){
 }
 }
 
+function reset(){
+	rw.setAttribute('style', 'transform:rotate(0deg)');
 
+}
 
 </script>
 
