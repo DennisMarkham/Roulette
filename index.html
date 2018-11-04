@@ -10,6 +10,7 @@
     z-index: 1;
     width: 20px;
     height: 20px;
+    transition: top 1s;
 }
 
 #wheel {
@@ -32,6 +33,8 @@ var randomNum = Math.floor(Math.random() * 355) + 1;
 
 var rw=document.getElementById('wheel');
 
+var rb = document.getElementById('ball');
+
 function rotate(degrees){
 	
 	rw.setAttribute('style', 'transition: transform 1s; transform:rotate(' + 360 + degrees + 'deg)');
@@ -46,11 +49,25 @@ function spin(){
     rotate(i);
     
 }
+console.log("complete")
+//**********Ball dropping animation
+//it need some sort of delay.  It needs to wait one second
+   //  function ballDrop(){
+   //  ball.style.top = "100px";
+  	// }
+
+  function ballDrop() {
+    setTimeout(function(){ rb.style.top = "100px";}, 1050);
+}
+
+ballDrop();
+
+//***********Ball dropping animation
 }
 
 function reset(){
 	rw.setAttribute('style', 'transform:rotate(0deg)');
-
+rb.style.top = "50px";
 }
 
 </script>
