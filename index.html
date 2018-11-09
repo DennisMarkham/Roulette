@@ -2,7 +2,9 @@
 <html>
 <head>
 
-	<style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <style>
 #ball {
     position: absolute;
     left: 200px;
@@ -12,10 +14,14 @@
     height: 20px;
     transition: top 1s;
 }
-
 #wheel {
-	
+ 
 }
+
+form {
+
+}
+
 </style>
 
 </head>
@@ -25,52 +31,84 @@
 
 <img id = "wheel" src = "Rwheelbg.png" onclick="spin()"></img>
 
+
+
 <button id = "reset" onclick="reset()">Reset</button>
+
+<p>Bet on:</p>
+<form action="">
+  <input type="radio" name="bet" value="310"> 21<br>
+  <input type="radio" name="bet" value="190"> 23<br>
+   <input type="radio" name="bet" value="100"> 9<br>
+  <input type="radio" name="bet" value="120"> 14<br>
+  <input type="radio" name="bet" value="240"> 13
+</form>
 
 <script>
 
+
+// 21 = 310
+
+// 23 = 190 degrees
+
+// 9 = 100
+
+// 14 = 120 degrees
+
+// 13 = 240
+
+
+
 var randomNum = Math.floor(Math.random() * 355) + 1; 
-
 var rw=document.getElementById('wheel');
-
 var rb = document.getElementById('ball');
-
 function rotate(degrees){
-	
-	rw.setAttribute('style', 'transition: transform 1s; transform:rotate(' + 360 + degrees + 'deg)');
-	console.log(degrees);
-	
+  
+  rw.setAttribute('style', 'transition: transform 1s; transform:rotate(' + 360 + degrees + 'deg)');
+  console.log(degrees);
+  
 }
-
 function spin(){
-	console.log("1");
-	for (i = 0; i < randomNum; i = i + 10) {
-		console.log("2");
+
+  var betNum = $('input[name=bet]:checked').val()
+console.log(betNum);
+  for (i = 0; i < randomNum; i = i + 10) {
+    console.log("2");
     rotate(i);
     
 }
-console.log("complete")
-//**********Ball dropping animation
-//it need some sort of delay.  It needs to wait one second
-   //  function ballDrop(){
-   //  ball.style.top = "100px";
-  	// }
+var winningDegrees = i - 10;
+console.log(winningDegrees);
+
+function winLoss()
+{
+if (betNum == winningDegrees)
+{
+  alert("Yay!  You are teh winz!")
+}
+else if (betNum == undefined)
+{
+alert ("You did not bet.")
+}
+else
+{
+  alert("Oh noes!  You are teh loos!")
+}
+}
 
   function ballDrop() {
     setTimeout(function(){ rb.style.top = "100px";}, 1050);
-}
+    setTimeout(winLoss, 2000);
 
+}
 ballDrop();
 
-//***********Ball dropping animation
 }
-
 function reset(){
-	rw.setAttribute('style', 'transform:rotate(0deg)');
+  rw.setAttribute('style', 'transform:rotate(0deg)');
 rb.style.top = "50px";
 randomNum = Math.floor(Math.random() * 355) + 1; 
 }
-
 </script>
 
 
