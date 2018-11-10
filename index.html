@@ -37,12 +37,16 @@ form {
 
 <p>Bet on:</p>
 <form action="">
-  <input type="radio" name="bet" value="310"> 21<br>
-  <input type="radio" name="bet" value="190"> 23<br>
-   <input type="radio" name="bet" value="100"> 9<br>
-  <input type="radio" name="bet" value="120"> 14<br>
-  <input type="radio" name="bet" value="240"> 13
+  
+
+  <input type="checkbox" name="21" value="310" id = "310"> 21<br>
+<input type="checkbox" name="9" value="100" id = "100"> 9<br>
+<input type="checkbox" name="14" value="120" id = "120"> 14<br>
+<input type="checkbox" name="13" value="240" id = "240"> 13
+
 </form>
+
+<p>Bet on up to four numbers.  However, be warned, the more numbers you bet on, the lower your chip return will be.</p>
 
 <script>
 
@@ -70,8 +74,7 @@ function rotate(degrees){
 }
 function spin(){
 
-  var betNum = $('input[name=bet]:checked').val()
-console.log(betNum);
+  
   for (i = 0; i < randomNum; i = i + 10) {
     console.log("2");
     rotate(i);
@@ -82,18 +85,43 @@ console.log(winningDegrees);
 
 function winLoss()
 {
-if (betNum == winningDegrees)
-{
-  alert("Yay!  You are teh winz!")
+
+//some kind of array to run through.
+
+var possBets = [310, 100, 120, 240];
+
+var checkedBets = [];
+
+var divisor = 0;
+
+var winner = false;
+for (i = 0; i < possBets.length; i++) { 
+    //check which boxes were checks, and pushes them to a 
+    //checked array
+    if (document.getElementById(possBets[i]).checked == true)
+    {
+      checkedBets.push(possBets[i]);
+    }
+  
 }
-else if (betNum == undefined)
-{
-alert ("You did not bet.")
+
+divisor = checkedBets.length;
+
+//now you have to ask do any of the checkBets == winningDegrees
+
+//checks if any of the checked bets were winning bets
+for (i = 0; i < checkedBets.length; i++) {
+  if (checkedBets[i] == winningDegrees)
+  {
+    winner = true;
+  }
 }
-else
+
+if (winner == true)
 {
-  alert("Oh noes!  You are teh loos!")
+  alert("Yay!  U r teh winz! Your chips have been multiplied by " + 36/divisor + ".");
 }
+
 }
 
   function ballDrop() {
