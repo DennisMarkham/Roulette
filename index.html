@@ -119,7 +119,11 @@ for (i = 0; i < checkedBets.length; i++) {
 
 if (winner == true)
 {
-  alert("Yay!  U r teh winz! Your chips have been multiplied by " + 36/divisor + ".");
+  alert("Yay!  U r teh winz! You earned " + 36/divisor + " chips.");
+}
+else if (divisor > 0)
+{
+  alert("You lost 1 chip.")
 }
 
 }
