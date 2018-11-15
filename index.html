@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <style>
 #ball {
     position: absolute;
-    left: 200px;
-    top: 50px;
+    left: 208px;
+    top: 40px;
     z-index: 1;
     width: 20px;
     height: 20px;
@@ -22,18 +30,45 @@ form {
 
 }
 
+.row {
+  padding: 20px;
+}
+
+
+
 </style>
 
 </head>
-<body>
+<body onload = "populateChips();">
 
+<div class = "container">
+
+<div class = "row">
+
+<div class = "col-lg-5">
 <img id = "ball" src = "ball.png" onclick="spin()"></img>
 
 <img id = "wheel" src = "Rwheelbg.png" onclick="spin()"></img>
+</div>
 
+<div class = "col-lg-1">
+<button id = "reset" onclick="reset()">Reset Wheel</button>
+</div>
 
+<div class = "col-lg-6">
+  <div class="well well-lg">
+    <span><center>Chips</center></span>
+    <br>
+    <div class = "text-center" style = "font-size: 180px;" id = "chipsInv">10</div>
+    <!-- Why won't this center!? -->
+    <br>
+    <span style = "float:right;" id ="purchase" onclick="gainChips(1);"><a style = "color:green !important;" href = "#">$ Purchase More Chips?</a></span>
+   <!--  Must find way to override link color -->
+  </div>
+</div>
 
-<button id = "reset" onclick="reset()">Reset</button>
+<!-- Row ends here -->
+</div>
 
 <p>Bet on:</p>
 <form action="">
@@ -48,9 +83,34 @@ form {
 
 <p>Bet on up to four numbers.  However, be warned, the more numbers you bet on, the lower your chip return will be.</p>
 
+<!-- container ends here -->
+</div>
 <script>
+var chips = 5;
 
 
+
+function populateChips()
+{
+$("#chipsInv").text(chips);
+}
+
+function gainChips(number)
+{
+  chips = chips + number;
+  $("#chipsInv").text(chips);
+}
+
+function loseChip()
+{
+  chips--;
+  $("#chipsInv").text(chips);
+
+  if (chips == 0)
+  {
+    alert("You are out of chips.  Purchase more chips to continue betting.")
+  }
+}
 // 21 = 310
 
 // 23 = 190 degrees
@@ -74,10 +134,11 @@ function rotate(degrees){
 }
 function spin(){
 
-  
+
   for (i = 0; i < randomNum; i = i + 10) {
     console.log("2");
     rotate(i);
+
     
 }
 var winningDegrees = i - 10;
@@ -119,22 +180,33 @@ for (i = 0; i < checkedBets.length; i++) {
 
 if (winner == true)
 {
-  alert("Yay!  U r teh winz! You earned " + 36/divisor + " chips.");
+  var earnings = 36/divisor;
+  alert("Yay!  U r teh winz! You earned " + earnings + " chips.");
+  gainChips(earnings);
 }
 else if (divisor > 0)
 {
   alert("You lost 1 chip.")
+  loseChip();
 }
 
+//function winLoss ends here
 }
 
   function ballDrop() {
-    setTimeout(function(){ rb.style.top = "100px";}, 1050);
+    setTimeout(function(){ rb.style.top = "90px";}, 1050);
+
+    if (chips > 0)
+    {
     setTimeout(winLoss, 2000);
+  }
 
 }
 ballDrop();
 
+
+
+//end of spin function()
 }
 function reset(){
   rw.setAttribute('style', 'transform:rotate(0deg)');
