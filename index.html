@@ -39,7 +39,7 @@ form {
 </style>
 
 </head>
-<body onload = "populateChips();">
+<body onload = "populate();">
 
 <div class = "container">
 
@@ -62,7 +62,8 @@ form {
     <div class = "text-center" style = "font-size: 180px;" id = "chipsInv">10</div>
     <!-- Why won't this center!? -->
     <br>
-    <span style = "float:right;" id ="purchase" onclick="gainChips(1);"><a style = "color:green !important;" href = "#">$ Purchase More Chips?</a></span>
+    <span style = "float:left" id = "earnings">Your earnings:</span>
+    <span style = "float:right;" id ="purchase" onclick="purchase()"><a style = "color:green !important;" href = "#">$ Purchase More Chips?</a></span>
    <!--  Must find way to override link color -->
   </div>
 </div>
@@ -88,17 +89,30 @@ form {
 <script>
 var chips = 5;
 
+var earnings = chips * (-1);
 
 
-function populateChips()
+
+function populate()
 {
 $("#chipsInv").text(chips);
+$("#earnings").text("Your earnings: " + earnings)
+}
+
+function purchase()
+{
+chips = chips + 1;
+$("#chipsInv").text(chips);
+earnings = earnings - 1;
+$("#earnings").text("Your earnings: " + earnings);
 }
 
 function gainChips(number)
 {
   chips = chips + number;
   $("#chipsInv").text(chips);
+  earnings = earnings + number;
+  $("#earnings").text("Your earnings: " + earnings);
 }
 
 function loseChip()
