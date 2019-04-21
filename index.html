@@ -106,16 +106,35 @@
 <!-- container ends here -->
 </div>
 <script>
+
+   
+
 var chips = 5;
 
 var earnings = chips * (-1);
 
-
+//checks "earnings" to change color
+function checkEarnings(e)
+{
+if (e < 0)
+{
+$("#earnings").css("color", "red");
+}
+else if (e == 0)
+{
+$("#earnings").css("color", "black");
+}
+else if (e > 0)
+{
+$("#earnings").css("color", "green");
+}
+}
 
 function populate()
 {
 $("#chipsInv").text(chips);
-$("#earnings").text("Your earnings: " + earnings)
+$("#earnings").text("Your earnings: " + earnings);
+checkEarnings(earnings);
 }
 
 function purchase()
@@ -124,6 +143,7 @@ chips = chips + 1;
 $("#chipsInv").text(chips);
 earnings = earnings - 1;
 $("#earnings").text("Your earnings: " + earnings);
+checkEarnings(earnings);
 }
 
 function gainChips(number)
@@ -132,6 +152,7 @@ function gainChips(number)
   $("#chipsInv").text(chips);
   earnings = earnings + number;
   $("#earnings").text("Your earnings: " + earnings);
+  checkEarnings(earnings);
 }
 
 function loseChip()
